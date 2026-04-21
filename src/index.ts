@@ -2,6 +2,7 @@ export interface Env {
   OPENAI_API_KEY: string;
   ANTHROPIC_API_KEY: string;
   GOOGLE_API_KEY: string;
+  NVIDIA_API_KEY: string;
 }
 
 const PROXY_CONFIG: Record<string, { baseUrl: string; authKey: keyof Env }> = {
@@ -16,6 +17,10 @@ const PROXY_CONFIG: Record<string, { baseUrl: string; authKey: keyof Env }> = {
   google: {
     baseUrl: "https://generativelanguage.googleapis.com/v1beta",
     authKey: "GOOGLE_API_KEY",
+  },
+  nvidia: {
+    baseUrl: "https://integrate.api.nvidia.com/v1",
+    authKey: "NVIDIA_API_KEY",
   },
 };
 
