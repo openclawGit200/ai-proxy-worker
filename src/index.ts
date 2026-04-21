@@ -19,7 +19,7 @@ const PROXY_CONFIG: Record<string, { baseUrl: string; authKey: keyof Env }> = {
     authKey: "GOOGLE_API_KEY",
   },
   nvidia: {
-    baseUrl: "https://integrate.api.nvidia.com/v1",
+    baseUrl: "https://integrate.api.nvidia.com",
     authKey: "NVIDIA_API_KEY",
   },
 };
@@ -45,6 +45,8 @@ async function proxyRequest(path: string, request: Request, config: { baseUrl: s
   headers.delete("Te");
   headers.delete("Trailer");
   headers.delete("Upgrade");
+  // Prevent CF from double-compressing the response
+  headers.delete("Accept-Encoding");
 
   // Claude requires a version header
   if (config.authKey === "ANTHROPIC_API_KEY") {
